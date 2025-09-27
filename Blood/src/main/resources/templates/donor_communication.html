@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Communication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2a5d84;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            margin-bottom: 20px;
+        }
+        label, select, textarea, input[type="submit"] {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #2a5d84;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #2a5d84;
+            color: white;
+        }
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Donor Communication</h1>
+    
+    <h2>Send Message</h2>
+    <form th:action="@{/communications/send}" method="post">
+        <label for="donorName">Select Donor:</label>
+        <select id="donorName" name="donorName" required>
+            <option value="">Select a donor</option>
+            <option th:each="donor : ${donors}" th:value="${donor.name}" th:text="${donor.name}">Donor Name</option>
+        </select>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
+
+        <input type="submit" value="Send Message">
+    </form>
+
+    <hr>
+    <h2>Communication History</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Donor Name</th>
+            <th>Message</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="communication : ${communications}">
+            <td th:text="${communication.id}">ID</td>
+            <td th:text="${communication.donorName}">Donor Name</td>
+            <td th:text="${communication.message}">Message</td>
+            <td th:text="${communication.communicationType}">Type</td>
+            <td th:text="${communication.status}">Status</td>
+            <td th:text="${#temporals.format(communication.createdAt, 'yyyy-MM-dd HH:mm')}">Date</td>
+            <td>
+                <a th:href="@{/communications/delete/{id}(id=${communication.id})}" class="btn" 
+                   onclick="return confirm('Are you sure you want to delete this communication?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

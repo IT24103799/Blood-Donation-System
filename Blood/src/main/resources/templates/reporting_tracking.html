@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporting & Tracking</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0fff0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #228b22;
+        }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            margin-bottom: 20px;
+        }
+        label, select, input[type="submit"] {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background-color: #228b22;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #228b22;
+            color: white;
+        }
+        .report-section {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Reporting & Tracking</h1>
+    
+    <h2>Generate Report</h2>
+    <form th:action="@{/reports/generate}" method="post">
+        <label for="report">Select Report Type:</label>
+        <select id="report" name="reportType" required>
+            <option value="">Select report type</option>
+            <option value="Donor Attendance">Donor Attendance</option>
+            <option value="Donation History">Donation History</option>
+            <option value="Feedback Summary">Feedback Summary</option>
+        </select>
+
+        <input type="submit" value="Generate Report">
+    </form>
+
+    <div th:if="${reportType}" class="report-section">
+        <h2 th:text="${reportType} + ' Report'">Report</h2>
+        
+        <!-- Donor Attendance Report -->
+        <div th:if="${reportType == 'Donor Attendance'}">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Donor Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appointment : ${appointments}">
+                    <td th:text="${appointment.id}">ID</td>
+                    <td th:text="${appointment.donorName}">Donor Name</td>
+                    <td th:text="${appointment.date}">Date</td>
+                    <td th:text="${appointment.time}">Time</td>
+                    <td th:text="${appointment.status}">Status</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Donation History Report -->
+        <div th:if="${reportType == 'Donation History'}">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Blood Type</th>
+                    <th>Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="donor : ${donors}">
+                    <td th:text="${donor.id}">ID</td>
+                    <td th:text="${donor.name}">Name</td>
+                    <td th:text="${donor.email}">Email</td>
+                    <td th:text="${donor.phone}">Phone</td>
+                    <td th:text="${donor.bloodType}">Blood Type</td>
+                    <td th:text="${donor.address}">Address</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Feedback Summary Report -->
+        <div th:if="${reportType == 'Feedback Summary'}">
+            <p>Feedback summary report would be displayed here. This could include communication history, donor feedback, and satisfaction ratings.</p>
+        </div>
+    </div>
+</body>
+</html>

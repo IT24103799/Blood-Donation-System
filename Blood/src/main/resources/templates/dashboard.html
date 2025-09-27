@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Receptionist Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #023e8a;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #90e0ef;
+            color: #023e8a;
+        }
+        main {
+            padding: 30px;
+            text-align: center;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Receptionist Dashboard</h1>
+    </header>
+    <nav>
+        <a th:href="@{/communications}">Donor Communication</a>
+        <a th:href="@{/appointments}">Appointment Management</a>
+        <a th:href="@{/donors}">Donor Profiles</a>
+        <a th:href="@{/coordination}">Coordination</a>
+        <a th:href="@{/reports}">Reporting & Tracking</a>
+    </nav>
+    <main>
+        <div class="card">
+            <h2>Welcome!</h2>
+            <p>Use the navigation bar above to access different receptionist functions.</p>
+        </div>
+    </main>
+</body>
+</html>
