@@ -10,6 +10,24 @@
             background-color: #f0fff0;
             padding: 20px;
         }
+        nav {
+            background-color: #023e8a;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #90e0ef;
+            color: #023e8a;
+        }
         h1, h2 {
             color: #228b22;
         }
@@ -52,6 +70,13 @@
     </style>
 </head>
 <body>
+<nav>
+    <a th:href="@{/communications}">Donor Communication</a>
+    <a th:href="@{/appointments}">Appointment Management</a>
+    <a th:href="@{/donors}">Donor Profiles</a>
+    <a th:href="@{/coordination}">Coordination</a>
+    <a th:href="@{/dashboard}">Dashboard</a>
+</nav>
     <h1>Reporting & Tracking</h1>
     
     <h2>Generate Report</h2>
