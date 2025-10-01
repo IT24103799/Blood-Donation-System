@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blood Donation Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #d32f2f;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Blood Donation Registration</h2>
+
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${success}" class="success" th:text="${success}"></div>
+    
+    <form action="/donor/register-detailed" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="nic">NIC:</label>
+    <input type="text" id="nic" name="nic" required>
+
+    <label for="contactNumber">Contact Number:</label>
+    <input type="text" id="contactNumber" name="contactNumber" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+
+    <label for="bloodType">Blood Type:</label>
+    <select id="bloodType" name="bloodType" required>
+        <option value="">--Select--</option>
+        <option th:each="bloodType : ${bloodTypes}" 
+                th:value="${bloodType.name()}" 
+                th:text="${bloodType.displayName}"></option>
+    </select>
+
+
+
+    <label for="donationLocation">Available Time :</label>
+        <select id="donationLocation" name="availableTime" required>
+            <option value="">--Select--</option>
+            <option value="AM1">8.00-9.00</option>
+            <option value="AM2">9.00-10.00</option>
+            <option value="AM3">10.00-11.00</option>
+            <option value="AM4">11.00-12.00</option>
+            <option value="PM1">12.00-13.00</option>
+            <option value="PM2">13.00-14.00</option>
+            <option value="PM3">14.00-15.00</option>
+            <option value="PM4">15.00-16.00</option>
+        </select>
+
+    <button type="submit">Register</button>
+    </form>
+    
+    <p style="text-align: center; margin-top: 20px;">
+        <a href="/donor/register">Simple Registration</a> | 
+        <a href="/">Home</a>
+    </p>
+</div>
+</body>
+</html>

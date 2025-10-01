@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags define character set, viewport for responsiveness, and the page title -->
+    <meta charset="UTF-8">
+    <title>Admin Login - Blood Donation System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Internal CSS for styling the login page -->
+    <style>
+        /* General body styles */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        /* Main container for the login form */
+        .container {
+            max-width: 400px;
+            margin: auto; /* Center the container horizontally */
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Adds a subtle shadow for depth */
+        }
+        /* Styling for the main heading */
+        h2 {
+            text-align: center;
+            color: #1976d2;
+        }
+        /* Styling for form labels */
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        /* A wrapper for the input fields to center them */
+        .input-group {
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+        }
+        /* Common styles for text inputs and select dropdowns */
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+        }
+        /* Styling for the login button */
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer; /* Changes cursor to a pointer on hover */
+        }
+        /* Style for the button on hover */
+        button:hover {
+            background-color: #0d47a1;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<!-- Main content container -->
+<div class="container">
+    <h2>Admin Login</h2>
+
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${success}" class="success" th:text="${success}"></div>
+    
+    <!-- The login form. The 'action' attribute would point to the server-side script that processes the login. -->
+    <form action="/staff/login" method="post">
+        <div class="input-group">
+            <!-- Role selection dropdown -->
+            <label for="role">Select Role:</label>
+            <select id="role" name="role" required>
+                <option value="">--Select Role--</option>
+                <option th:each="role : ${roles}" 
+                        th:value="${role.displayName}" 
+                        th:text="${role.displayName}"></option>
+            </select>
+
+            <!-- Username input field -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <!-- Password input field -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <!-- Submit button for the form -->
+        <button type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html>

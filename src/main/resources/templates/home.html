@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blood Donation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #d32f2f;
+            margin-bottom: 30px;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        button, .btn {
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #d32f2f;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #b71c1c;
+        }
+        .btn-secondary {
+            background-color: #1976d2;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #0d47a1;
+        }
+        .btn-success {
+            background-color: #388e3c;
+            color: white;
+        }
+        .btn-success:hover {
+            background-color: #2e7d32;
+        }
+        .description {
+            margin: 30px 0;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to Blood Donation System</h1>
+    
+    <div class="description">
+        <p>Join us in saving lives through blood donation. Register as a donor or access the staff portal to manage blood requests and donations.</p>
+    </div>
+    
+    <div class="button-group">
+        <a href="/donor/register-detailed" class="btn btn-success">Donor Registration</a>
+        <a href="/staff/login" class="btn btn-secondary">Staff Login</a>
+        <a href="/staff/register" class="btn btn-secondary">Staff Registration</a>
+    </div>
+    
+    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <p><strong>Quick Links:</strong></p>
+        <p>
+            <a href="/donor/list">View Donors</a> | 
+            <a href="/staff/list">View Staff</a> | 
+            <a href="/h2-console" target="_blank">Database Console</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>

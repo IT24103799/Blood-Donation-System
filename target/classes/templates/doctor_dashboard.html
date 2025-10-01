@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1976d2;
+        }
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0d47a1;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+        .recent-requests {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Doctor Dashboard</h1>
+    <p>Welcome, <span th:text="${staff.fullName}">Dr. Smith</span>!</p>
+    
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+    <div th:if="${success}" class="success" th:text="${success}"></div>
+    
+    <div class="form-section">
+        <h2>Request Blood</h2>
+        <form action='/doctor/request-blood' method='post'>
+            <label>Blood Type:</label>
+            <select name='blood_type' required>
+                <option value="">--Select Blood Type--</option>
+                <option th:each="bloodType : ${bloodTypes}" 
+                        th:value="${bloodType.displayName}" 
+                        th:text="${bloodType.displayName}"></option>
+            </select>
+            
+            <label>Amount (ml):</label>
+            <input type='number' name='amount' placeholder='Amount in ml' min="1" required />
+            
+            <label>Emergency Level:</label>
+            <select name='emergency_level' required>
+                <option value="">--Select Emergency Level--</option>
+                <option th:each="level : ${emergencyLevels}" 
+                        th:value="${level.displayName}" 
+                        th:text="${level.displayName}"></option>
+            </select>
+            
+            <button type='submit'>Request Blood</button>
+        </form>
+    </div>
+    
+    <div class="recent-requests" th:if="${recentRequests != null and !recentRequests.empty}">
+        <h2>Your Recent Requests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Blood Type</th>
+                    <th>Amount (ml)</th>
+                    <th>Emergency Level</th>
+                    <th>Status</th>
+                    <th>Request Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="request : ${recentRequests}">
+                    <td th:text="${request.bloodType.displayName}"></td>
+                    <td th:text="${request.amount}"></td>
+                    <td th:text="${request.emergencyLevel.displayName}"></td>
+                    <td th:text="${request.status.displayName}"></td>
+                    <td th:text="${#temporals.format(request.requestDate, 'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <p style="text-align: center; margin-top: 30px;">
+        <a href="/doctor/requests">View All Requests</a> | 
+        <a href="/staff/logout">Logout</a>
+    </p>
+</div>
+</body>
+</html>
